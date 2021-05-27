@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} {{ title }} | Social Site {% endblock title %}
+{% block stylelink %} {% endblock stylelink %}
+{% block inlineStyle %}
+    <style>
+    .crop{
+        width:200px;
+        height:200px;
+        overflow:hidden;
+
+    }
+    .crop img{
+        width:400px;
+        height:400px;
+        margin:-75px 0 0 -100px;
+
+    }
+    .bg-dark {
+    background-color: #3b5998!important;
+    }
+    </style>
+
+{% endblock inlineStyle %}
+
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+
+{% block main_contain %}
+    <div>
+        <div class="row">
+            <div class="col-sm-4">
+                {% if user.user_profile.profile_pic %}
+                 <img src="{{ user.user_profile.profile_pic.url }}" class="rounded-circle" width="250px" height="250px" alt="img not found">
+                {% else %}
+                   <img src="/media/default_pic.png" class="rounded-circle" width="250px" height="250px" alt="img not found">
+                {% endif %}
+            </div>
+            <div class="col-sm-8">
+                <h3>{{ user.username }} &nbsp; <a href="{% url 'userApp:ProfileEdit' %}">Profile Edit</a></h3>
+                <br>
+                <h4>{{ user.post.count}} Posts &nbsp; &nbsp; {{ user.follower.count }} Following &nbsp; &nbsp; {{ user.following.count }} Follower </h4>
+                <br>
+                <h4>{{ user.user_profile.full_name  }}</h4> <!-- user_profile related name model er UserProfile-->
+                <h6>{{ user.user_profile.description|linebreaks }}</h6> <!-- user_profile related name model er UserProfile-->
+            </div>
+        </div>
+    </div>
+    <hr>
+    <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Post
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Create New Post </h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+          <form  method="POST"  enctype="multipart/form-data">
+                {{ form|crispy }}
+                  {% csrf_token %}
+
+               <button type="submit" style="width: 100%;" class="btn btn-primary">Send </button>
+
+          </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-danger" data-dismiss="modal">cancel</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<br>
+<br>
+    <!-- show all post -->
+    <div class="row">
+    {% for p in user.post.all %}
+        <div class="crop">
+            <img src="{{ p.image.url }}" alt="Img not found" title="{{ p.caption }}">
+        </div>
+    {% endfor %}
+    </div>
+
+
+
+{% endblock main_contain %}
+
+{% block javascriptLink %} {% endblock javascriptLink %}
+{% block inlinejavascriptLink %} {% endblock inlinejavascriptLink %}

@@ -1,0 +1,35 @@
+ {% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href=""><img src="{% static 'myfile/images/facebook.png' %}" style="width:100px;height:50px"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+       <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'App_post:homepage' %}">Facebook <span class="sr-only">(current)</span></a>
+      </li>
+
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <form class="float-right">
+            <div class="form-row">
+              <div class="col-auto">
+                <label class="sr-only" for="emailPhone">Email or Phone</label>
+                <input type="text" class="form-control form-control-sm mb-2" id="emailPhone" placeholder="Email or Phone">
+              </div>
+              <div class="col-auto">
+                <label class="sr-only" for="password">Password</label>
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control form-control-sm" id="password" placeholder="Password">
+                </div>
+              </div>
+              <div class="col-auto">
+                <input type="submit" id="submit" class="btn btn-sm btn-fb mb-2 align-bottom" value="Log In">
+              </div>
+            </div>
+          </form>
+
+    </ul>
+  </div>
+  </nav>

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ title }} | Social Site {% endblock title %}
+{% block stylelink %} {% endblock stylelink %}
+{% block inlineStyle %}
+    <style>
+    .bg-dark {
+    background-color: #3b5998!important;
+    }
+    </style>
+{% endblock inlineStyle %}
+
+{% block navbar %}
+    {% include 'navbar.html' %}
+{% endblock navbar %}
+
+{% block main_contain %}
+    {% if search %}
+        {% for r in results %}
+            <div class="row">
+                <div class="col-sm-2">
+                    {% if user.user_profile.profile_pic %}
+                        <img src="{{ r.user_profile.profile_pic.url }}" style="width:75px; height:75px;"
+                             class="rounded-circle"
+                             alt="Img Not Found"> <br>
+                    {% else %}
+                        <img src="/media/auto_pic_r/default_pic.png" style="width:75px; height:75px;"
+                             class="rounded-circle"
+                             alt="Img Not Found"> <br>
+
+                    {% endif %}
+                </div>
+                <div class="col-sm-10">
+                    <a href="{% url 'userApp:search_Single_user' username=r.username %}">  {{ r.username }}</a>
+                    <br>
+                    {{ r.user_profile.full_name }}
+                </div>
+            </div>
+        {% endfor %}
+        <!--show post in Home page-->
+    {% else %}
+        <div class="row">
+            <div class="col-sm-8">
+                {% for po in post_show %} <!--following and post related-name model-->
+                    <div style="border:1px solid #888888;">
+                        <div style="padding:10px;">
+                            {% if po.author.user_profile.profile_pic %}
+                                <img src="{{ user.user_profile.profile_pic.url }}" style="width:40px; height:40px;"
+                                     class="rounded-circle" alt="Img Not Found">
+                            {% else %}
+                                <img src="/media/auto_pic_r/default_pic.png" class="rounded-circle" width="40px"
+                                     height="40px"
+                                     alt="img d not Found">
+                            {% endif %}
+                            <a href="{% url 'userApp:search_Single_user' username=po.author %}">{{ po.author }}</a>
+                        </div>
+                        <img src="{{ po.image.url }}" width="100%;" alt="image not found" style="max-height: 370px;">
+                        <div class="row">
+                        <div style="padding:20px;">
+                            {{ po.like_post.count }}Likes <br>
+                            {% if po.pk in like_post_list %}
+                                <a href="{% url 'App_post:unliked' pk=po.pk %}"><i class="far fa-thumbs-up"></i></a>
+                            {% else %}
+                                <a href="{% url 'App_post:liked' pk=po.pk %}"><i class="fas fa-thumbs-up"></i></a>
+                            {% endif %}
+                        </div>
+                       <div style="padding:20px ;" class="ml-auto">
+                           <a>Comment</a>
+                       </div>
+                    </div>
+                    </div>
+                    <br>
+                {% endfor %}
+            </div>
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-4">
+                        {% if user.user_profile.profile_pic %}
+                            <img src="{{ user.user_profile.profile_pic.url }}" style="width:75px; height:75px;"
+                                 class="rounded-circle"
+                                 alt="Img Not Found"> <br>
+                        {% else %}
+                            <img src="/media/auto_pic_r/default_pic.png" style="width:75px; height:75px;"
+                                 class="rounded-circle"
+                                 alt="Img Not Found"> <br>
+
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-8">
+                        <a href="{% url 'userApp:search_Single_user' username=user.username %}">  {{ user.username }}</a>
+                        <br>
+                        <a>  {{ user.user_profile.full_name }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--show post in Home page-->
+
+    {% endif %}
+{% endblock main_contain %}
+
+{% block javascriptLink %} {% endblock javascriptLink %}
+{% block inlinejavascriptLink %} {% endblock inlinejavascriptLink %}

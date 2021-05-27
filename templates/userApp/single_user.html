@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} {{ title }} | Social Site {% endblock title %}
+{% block stylelink %} {% endblock stylelink %}
+{% block inlineStyle %}
+    <style>
+    .crop{
+        width:200px;
+        height:200px;
+        overflow:hidden;
+
+    }
+    .crop img{
+        width:400px;
+        height:400px;
+        margin:-75px 0 0 -100px;
+
+    }
+    </style>
+
+{% endblock inlineStyle %}
+
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+
+{% block main_contain %}
+    <div>
+        <div class="row">
+            <div class="col-sm-4">
+                {% if user_single.user_profile.profile_pic %}
+                 <img src="{{ user_single.user_profile.profile_pic.url }}" class="rounded-circle" width="250px" height="250px" alt="img not found">
+                {% else %}
+                   <img src="/media/default_pic.png" class="rounded-circle" width="250px" height="250px" alt="img not found">
+                {% endif %}
+            </div>
+            <div class="col-sm-8">
+                <h3>{{ user_single.username }} &nbsp; </h3>
+                    {% if not already_followed %}
+                     <a href="{% url 'userApp:followed' username=user_single.username %}" class="btn btn-primary">Following </a>
+                     {% else %}
+                     <a href="{% url 'userApp:unfollow' username=user_single.username %}" class="btn btn-primary">Unfollow </a>
+                     {% endif %}
+
+                <br>
+                <h4>{{ user_single.post.count}} Posts &nbsp; &nbsp; {{ user_single.follower.count }} Following &nbsp; &nbsp; {{ user_single.following.count }} Follower </h4>
+                <br>
+                <h4>{{ user_single.user_profile.full_name  }}</h4> <!-- user_profile related name model er UserProfile-->
+                <h6>{{ user_single.user_profile.description|linebreaks }}</h6> <!-- user_profile related name model er UserProfile-->
+            </div>
+        </div>
+    </div>
+    <hr>
+
+<br>
+<br>
+    <!-- show all post -->
+    <div class="row">
+    {% for p in user_single.post.all %}
+        <div class="crop">
+            <img src="{{ p.image.url }}" alt="Img not found" title="{{ p.caption }}">
+        </div>
+    {% endfor %}
+    </div>
+
+
+
+{% endblock main_contain %}
+
+{% block javascriptLink %} {% endblock javascriptLink %}
+{% block inlinejavascriptLink %} {% endblock inlinejavascriptLink %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} {{ title }} | Social Site {% endblock title %}
+{% block stylelink %} {% endblock stylelink %}
+{% block inlineStyle %}
+    <style>
+     .bg-dark {
+    background-color: #3b5998!important;
+    }
+    </style>
+{% endblock inlineStyle %}
+
+{% block navbar %}
+    {% include 'navbar.html' %}
+{% endblock navbar %}
+
+{% block main_contain %}
+    <div class="profile_Edit" >
+            <form action="" method="post" enctype="multipart/form-data">
+               {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" style="width: 100%;" class="btn btn-primary">Edit Profile</button>
+            </form>
+        </div>
+{% endblock main_contain %}
+
+{% block javascriptLink %} {% endblock javascriptLink %}
+{% block inlinejavascriptLink %} {% endblock inlinejavascriptLink %}

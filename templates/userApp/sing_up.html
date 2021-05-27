@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} {{ title }}| Social Site {% endblock title %}
+{% block stylelink %} {% endblock stylelink %}
+{% block inlineStyle %}
+    <style>
+    .sing_up{
+        width:450px;
+        border: 1px solid #ccc;
+        padding: 20px 30px
+    }
+    .log_in{
+        width:450px;
+        border: 1px solid #ccc;
+        padding: 20px 30px
+    }
+    .bg-dark {
+    background-color: #3b5998!important;
+    }
+    </style>
+{% endblock inlineStyle %}
+
+{% block navbar %}
+ {% include 'navbar2.html' %}
+{% endblock navbar %}
+
+{% block main_contain %}
+    <div class="row">
+    <div class="col-sm-5 mt-5">
+     <img src="{% static 'myfile/images/facebook_background.png' %}" style="width:90%;">
+    </div>
+    <div class="col-sm-7">
+            <center>
+        <div class="sing_up" >
+            <h3>Create an account .</h3>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" style="width: 100%;" class="btn btn-primary">Sing Up</button>
+            </form>
+        </div>
+
+       <div class="log_in">
+           <p>Have an account? <a href="{% url 'userApp:login' %}">Log in</a></p>
+       </div>
+    </center>
+    </div>
+    </div>
+
+
+    <footer class="p-2">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-sm-12">
+            <ul class="list-inline">
+              <li class="list-inline-item"><a href="#">English (US)</a></li>
+              <li class="list-inline-item"><a href="#">Español</a></li>
+              <li class="list-inline-item"><a href="#">Français (France)</a></li>
+              <li class="list-inline-item"><a href="#">中文(简体)</a></li>
+              <li class="list-inline-item"><a href="#">العربية</a></li>
+              <li class="list-inline-item"><a href="#">Português (Brasil)</a></li>
+              <li class="list-inline-item"><a href="#">Italiano</a></li>
+              <li class="list-inline-item"><a href="#">한국어</a></li>
+              <li class="list-inline-item"><a href="#">Deutsch</a></li>
+              <li class="list-inline-item"><a href="#">हिन्दी</a></li>
+              <li class="list-inline-item"><a href="#">日本語</a></li>
+              <li class="list-inline-item">
+                <a href="#" class="btn-secondary btn-add-language">
+                  <i class="fas fa-plus fa-1x text-white"></i>
+                </a>
+              </li>
+            </ul>
+            <hr>
+            <ul class="list-inline">
+              <li class="list-inline-item"><a href="#">Sign Up</a></li>
+              <li class="list-inline-item"><a href="#">Log In</a></li>
+              <li class="list-inline-item"><a href="#">Messenger</a></li>
+              <li class="list-inline-item"><a href="#">Facebook Lite</a></li>
+              <li class="list-inline-item"><a href="#">Watch</a></li>
+              <li class="list-inline-item"><a href="#">People</a></li>
+              <li class="list-inline-item"><a href="#">Profiles</a></li>
+              <li class="list-inline-item"><a href="#">Pages</a></li>
+              <li class="list-inline-item"><a href="#">Pages Categories</a></li>
+              <li class="list-inline-item"><a href="#">Events</a></li>
+              <li class="list-inline-item"><a href="#">Places</a></li>
+              <li class="list-inline-item"><a href="#">Games</a></li>
+              <li class="list-inline-item"><a href="#">Locations</a></li>
+              <li class="list-inline-item"><a href="#">Marketplace</a></li>
+              <li class="list-inline-item"><a href="#">Groups</a></li>
+              <li class="list-inline-item"><a href="#">Instagram</a></li>
+              <li class="list-inline-item"><a href="#">Local</a></li>
+              <li class="list-inline-item"><a href="#">Fundraisers</a></li>
+              <li class="list-inline-item"><a href="#">Services</a></li>
+              <li class="list-inline-item"><a href="#">About</a></li>
+              <li class="list-inline-item"><a href="#">Create Ad</a></li>
+              <li class="list-inline-item"><a href="#">Create Page</a></li>
+              <li class="list-inline-item"><a href="#">Developers</a></li>
+              <li class="list-inline-item"><a href="#">Careers</a></li>
+              <li class="list-inline-item"><a href="#">Privacy</a></li>
+              <li class="list-inline-item"><a href="#">Cookies</a></li>
+              <li class="list-inline-item"><a href="#">Cookies</a></li>
+              <li class="list-inline-item"><a href="#">Ad Choices <i class="fas fa-ad"></i></a></li>
+              <li class="list-inline-item"><a href="#">Terms</a></li>
+              <li class="list-inline-item"><a href="#">Account Security</a></li>
+              <li class="list-inline-item"><a href="#">Login Help</a></li>
+              <li class="list-inline-item"><a href="#">Help</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+
+{% endblock main_contain %}
+
+{% block javascriptLink %} {% endblock javascriptLink %}
+{% block inlinejavascriptLink %} {% endblock inlinejavascriptLink %}

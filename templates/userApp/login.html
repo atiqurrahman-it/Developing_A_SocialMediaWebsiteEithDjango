@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{ title }} | Social Site {% endblock title %}
+{% block stylelink %} {% endblock stylelink %}
+{% block inlineStyle %}
+    <style>
+    .sing_up{
+        width:550px;
+        border: 1px solid #ccc;
+        padding: 20px 30px
+    }
+    .log_in{
+        width:550px;
+        border: 1px solid #ccc;
+        padding: 20px 30px
+    }
+    .bg-dark {
+    background-color: #3b5998!important;
+    }
+    </style>
+{% endblock inlineStyle %}
+
+{% block navbar %}
+     {% include 'navbar2.html' %}
+{% endblock navbar %}
+
+{% block main_contain %}
+     <center>
+        <div class="log_in" >
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" style="width: 100%;" class="btn btn-primary">Sing Up</button>
+            </form>
+        </div>
+
+       <div class="sing_up">
+           <p>Don't have account? <a href="{% url 'userApp:sing_up' %}">Sing up </a></p>
+       </div>
+    </center>
+{% endblock main_contain %}
+
+{% block javascriptLink %} {% endblock javascriptLink %}
+{% block inlinejavascriptLink %} {% endblock inlinejavascriptLink %}
