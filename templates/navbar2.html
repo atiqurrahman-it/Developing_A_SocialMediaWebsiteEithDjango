@@ -30,6 +30,28 @@
             </div>
           </form>
 
+        <li class="nav-item dropdown">
+
+            {% if user.user_profile.profile_pic %}
+                <a class="nav-link " href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"><img
+                        src="{{ user.user_profile.profile_pic.url }}" class="rounded-circle" width="40px"
+                        height="40px" class="rounded-circle" alt="img not Found"> </a>
+            {% else %}
+                <a class="nav-link " href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"><img src="/media/auto_pic_r/default_pic.png"
+                                                                   class="rounded-circle" width="75px"
+                                                                   height="75px" alt="img not Found">
+                </a>
+            {% endif %}
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="nav-link" href="{% url 'userApp:login' %}">Login</a>
+             <a class="nav-link" href="{% url 'userApp:sing_up' %}">SignUp</a>
+
+            </div>
+        </li>
+
+
     </ul>
   </div>
   </nav>

@@ -7,6 +7,10 @@
     .bg-dark {
     background-color: #3b5998!important;
     }
+    .dropdown-menu {
+
+    background-color: #3b5998;
+    }
     </style>
 {% endblock inlineStyle %}
 
@@ -59,7 +63,7 @@
                         <div style="padding:20px;">
                             {{ po.like_post.count }}Likes <br>
                             {% if po.pk in like_post_list %}
-                                <a href="{% url 'App_post:unliked' pk=po.pk %}"><i class="far fa-thumbs-up"></i></a>
+                                <a href="{% url 'App_post:unliked' pk=po.pk %}"><i class="far fa-thumbs-up fa-2px"></i></a>
                             {% else %}
                                 <a href="{% url 'App_post:liked' pk=po.pk %}"><i class="fas fa-thumbs-up"></i></a>
                             {% endif %}

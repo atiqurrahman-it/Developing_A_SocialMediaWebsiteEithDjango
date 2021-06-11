@@ -14,27 +14,43 @@
         <button class="btn btn-success" type="submit">Search</button>
       </form>
     </ul>
-    <ul class="navbar-nav ml-auto">
-        {% if user.is_authenticated %}
-       <li class="nav-item">
-        <a class="nav-link" href="{% url 'userApp:Logout' %}">Logout</a>
-      </li>
-         <li class="nav-item">
-        <a class="nav-link" href="{% url 'userApp:sing_up' %}">SignUp</a>
-      </li>
-       <li class="nav-item">
-       {% if user.user_profile.profile_pic %}
-       <a class="nav-link" href="{% url 'userApp:profile' %}"><img src="{{ user.user_profile.profile_pic.url }}" class="rounded-circle"  width="40px" height="40px"  class="rounded-circle"  alt="img not Found"> </a>
-       {% else %}
-       <a class="nav-link" href="{% url 'userApp:profile' %}"><img src="/media/default_pic.png" class="rounded-circle"  width="75px" height="75px" alt="img not Found"> </a>
-        {% endif %}
-      </li>
-        {% else %}
+      <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+              <li class="nav-item dropdown">
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'userApp:login' %}">Login</a>
-      </li>
-        {% endif %}
-    </ul>
+                  {% if user.user_profile.profile_pic %}
+                      <a class="nav-link " href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false"><img
+                              src="{{ user.user_profile.profile_pic.url }}" class="rounded-circle" width="40px"
+                              height="40px" class="rounded-circle" alt="img not Found"> </a>
+                  {% else %}
+                      <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false"><img src="/media/default_pic.png"
+                                                                                  class="rounded-circle" width="75px"
+                                                                                  height="75px" alt="img not Found">
+                      </a>
+                  {% endif %}
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="nav-link" href="{% url 'userApp:Logout' %}">Logout</a>
+                      <a class="nav-link" href="{% url 'userApp:profile' %}">Profile View</a>
+                  </div>
+              </li>
+
+
+          {% else %}
+            <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                      Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="nav-link" href="{% url 'userApp:login' %}">Login</a>
+                       <a class="nav-link" href="{% url 'userApp:sing_up' %}">SignUp</a>
+
+                  </div>
+              </li>
+
+          {% endif %}
+      </ul>
   </div>
   </nav>
